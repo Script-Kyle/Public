@@ -1,1 +1,26 @@
-loadstring(game:HttpGet("https://api.junkie-development.de/api/v1/luascripts/public/b4c341e89ae475d3c86f02aeecd4deb1e58a02442dc92d9074c755bf6e5c1058/download"))()
+-- Protected By Akimbo
+-- Client-side wrapped loader (clean / locked)
+local _B=[[Protected By Akimbo]]
+local _D=[[bG9hZHN0cmluZyhnYW1lOkh0dHBHZXQoImh0dHBzOi8vYXBpLmp1bmtpZS1kZXZlbG9wbWVudC5kZS9hcGkvdjEvbHVhc2NyaXB0cy9wdWJsaWMvYjRjMzQxZTg5YWU0NzVkM2M4NmYwMmFlZWNkNGRlYjFlNThhMDI0NDJkYzkyZDkwNzRjNzU1YmY2ZTVjMTA1OC9kb3dubG9hZCIpKSgp]]
+
+local function _d(s)
+  local b='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+  s=string.gsub(s,'[^'..b..'=]','')
+  return (s:gsub('.',function(x)
+    if x=='=' then return '' end
+    local r,f='',(b:find(x)-1)
+    for i=6,1,-1 do r=r..(f%2^i-f%2^(i-1)>0 and '1' or '0') end
+    return r
+  end):gsub('%d%d%d?%d?%d?%d?%d?%d?',function(x)
+    if #x~=8 then return '' end
+    local c=0
+    for i=1,8 do c=c+(x:sub(i,i)=='1' and 2^(8-i) or 0) end
+    return string.char(c)
+  end))
+end
+
+local ok,err=pcall(function()
+  local fn=loadstring(_d(_D))
+  if fn then fn() end
+end)
+if not ok then warn(_B..": "..tostring(err)) end
